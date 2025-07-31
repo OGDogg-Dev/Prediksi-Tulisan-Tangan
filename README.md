@@ -185,5 +185,5 @@ Jika ada pertanyaan atau saran, jangan ragu untuk menghubungi.
 
 ---
 
-Kalau kamu ingin saya buatkan **file README.md** dalam bentuk file siap upload, atau versi presentasi slide, tinggal bilang ya!
+
 ```
