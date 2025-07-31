@@ -1,61 +1,189 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ✍️ Prediksi Tulisan Tangan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web berbasis **Laravel 12** untuk memprediksi teks dari gambar tulisan tangan menggunakan **Tesseract OCR** dengan package PHP [`thiagoalessio/tesseract-ocr`](https://github.com/thiagoalessio/tesseract-ocr-for-php).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Upload gambar tulisan tangan 📸
+- Proses OCR untuk prediksi teks 🔍
+- Tampilkan hasil teks yang bersih ✨
+- Hitung jumlah karakter & kata 🔢
+- Preview gambar hasil upload 🖼️
+- Mendukung bahasa Inggris dan Indonesia 🇬🇧🇮🇩
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠️ Persyaratan Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.x atau lebih baru 🐘
+- Laravel 12 ⚙️
+- Tesseract OCR (terinstall di komputer/server) 🖥️
+- Composer 📦
+- Web server (Apache, Nginx, dll) 🌐
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📝 Langkah Instalasi Lengkap
 
-## Laravel Sponsors
+### 1️⃣ Install Laravel (jika belum ada)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer create-project laravel/laravel prediksi-tulisan-tangan
+cd prediksi-tulisan-tangan
+````
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2️⃣ Clone repo (jika pakai repo ini)
 
-## Contributing
+```bash
+git clone https://github.com/OGDogg-Dev/Prediksi-Tulisan-Tangan.git
+cd Prediksi-Tulisan-Tangan
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+### 3️⃣ Install dependency PHP
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4️⃣ Setup file environment
 
-## License
+* Copy file `.env.example` ke `.env`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+cp .env.example .env
+```
+
+* Sesuaikan konfigurasi database, jika menggunakan.
+
+---
+
+### 5️⃣ Generate key aplikasi Laravel
+
+```bash
+php artisan key:generate
+```
+
+---
+
+### 6️⃣ Buat symbolic link storage
+
+```bash
+php artisan storage:link
+```
+
+---
+
+### 7️⃣ Install Tesseract OCR
+
+* **Windows**:
+  Unduh dan install dari:
+  [https://github.com/tesseract-ocr/tesseract/releases](https://github.com/tesseract-ocr/tesseract/releases)
+  Default path biasanya:
+  `C:\Program Files\Tesseract-OCR\tesseract.exe`
+
+* **Linux (Ubuntu/Debian)**:
+
+```bash
+sudo apt update
+sudo apt install tesseract-ocr
+```
+
+* **MacOS (Homebrew)**:
+
+```bash
+brew install tesseract
+```
+
+---
+
+### 8️⃣ Pastikan path executable Tesseract di controller sudah benar
+
+```php
+->executable('C:\Program Files\Tesseract-OCR\tesseract.exe')
+```
+
+Atau hapus baris `->executable()` jika sudah ada di PATH environment variabel.
+
+---
+
+### 9️⃣ Jalankan server Laravel
+
+```bash
+php artisan serve
+```
+
+---
+
+### 🔟 Akses aplikasi di browser
+
+```
+http://localhost:8000/ocr
+```
+
+---
+
+## 🧑‍💻 Cara penggunaan
+
+1. Klik tombol **Choose File** dan pilih gambar tulisan tangan.
+2. Klik **Proses OCR** untuk mulai prediksi.
+3. Lihat hasil teks di sebelah kanan.
+4. Jumlah karakter dan kata ditampilkan di bawah hasil.
+5. Preview gambar yang diupload tampil di bawah form.
+
+---
+
+## 👍 Kelebihan
+
+* Implementasi sederhana & mudah dikembangkan
+* Mendukung bahasa Indonesia dan Inggris
+* Bersih dari spasi dan whitespace berlebihan
+* Preview gambar upload
+* Validasi upload menggunakan Laravel
+
+---
+
+## 👎 Kekurangan
+
+* Akurasi tergantung kualitas gambar
+* Belum ada preprocessing otomatis (rotasi, kontras, dll)
+* Perlu instalasi Tesseract manual
+* Tidak cocok untuk tulisan tangan rumit
+* Belum ada batch processing
+
+---
+
+## 🔮 Rencana pengembangan
+
+* Tambahkan preprocessing gambar otomatis
+* Dukungan bahasa & model OCR lebih banyak
+* Auto-rotate dan deskew
+* Batch upload & simpan hasil
+* Model AI handwriting recognition khusus
+
+---
+
+## 📂 Struktur folder penting
+
+* `app/Http/Controllers/OCRController.php` — Logika OCR
+* `resources/views/ocr/form.blade.php` — Form dan hasil OCR
+* `storage/app/public/uploads` — Tempat simpan gambar upload
+
+---
+
+Terima kasih sudah menggunakan aplikasi ini! 🙏
+Jika ada pertanyaan atau saran, jangan ragu untuk menghubungi.
+
+```
+
+---
+
+Kalau kamu ingin saya buatkan **file README.md** dalam bentuk file siap upload, atau versi presentasi slide, tinggal bilang ya!
+```
