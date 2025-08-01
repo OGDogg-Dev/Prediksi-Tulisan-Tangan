@@ -125,7 +125,7 @@ php artisan serve
 ### 🔟 Akses aplikasi di browser
 
 ```
-http://localhost:8000/ocr
+http://localhost:8000/tulisan
 ```
 
 ---
